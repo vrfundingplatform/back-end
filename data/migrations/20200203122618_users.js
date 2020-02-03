@@ -9,6 +9,9 @@ exports.up = function(knex) {
         .notNullable()
         .unique()
 
+    users.string('password', 255)
+        .notNullable()
+
     users.string('email', 255)
         .notNullable()
         .unique()
@@ -29,10 +32,6 @@ exports.up = function(knex) {
         users.text('bio', 255)
 
         users.boolean('bankacct')
-        .notNullable()
-        .defaultTo(false)
-
-        users.boolean('creditcard')
         .notNullable()
         .defaultTo(false)
 

@@ -8,6 +8,7 @@ exports.seed = function(knex) {
         {
           id: 1, 
           username: 'bslayer',
+          password: 'test1',
           email: 'slayer@gmail.com',
           firstname: 'Buffy',
           lastname: 'Summers',
@@ -16,7 +17,6 @@ exports.seed = function(knex) {
           avatar: '',
           bio: 'Seeks out and destroy vampires!',
           bankacct: (true),
-          creditcard: (true),
           age: (true),
         },
       ]);
