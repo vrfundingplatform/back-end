@@ -13,6 +13,12 @@ function generateToken(user) {
     return jwt.sign(payload, process.env.JWT_SECRET || 'lalalalkdjhaha', options);
   }
 
+router.get('/', (req, res) => {
+  const users = {
+    headers: { accept: 'application/json' },
+  };
+});
+
 router.post('/regsister', (req, res) => {
     const { username, password } = req.body;
     Users.insert({ username, password: bcrypt.hashSync(password, 8) })
