@@ -28,7 +28,7 @@ exports.up = function(knex) {
 
         users.text('bio', 255)
 
-        users.boolean('backacct')
+        users.boolean('bankacct')
         .notNullable()
         .defaultTo(false)
 
