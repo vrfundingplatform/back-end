@@ -18,7 +18,8 @@ function find() {
 }
 
 function findBy(where) {
-    return db('users').where(where);
+    return db('users')
+    .where(where);
 }
 
 function findByUsername(username) {

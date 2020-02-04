@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const Users = require('../api/userModal');
+const Users = require('./authModal');
 
 function generateToken(user) {
     const payload = {

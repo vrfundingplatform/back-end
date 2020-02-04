@@ -39,8 +39,45 @@ exports.up = function(knex) {
         .notNullable()
         .defaultTo(false)
   })
+
+  return knex.schema.createTable('projects', projects => {
+    projects.increments('id')
+        .notNullable()
+        .unique()
+
+    projects.binary('users_projectid', 255)
+        .notNullable()
+        .unique()
+
+    projects.string('category', 255)
+        .notNullable()
+
+    projects.string('subcategory', 255)
+    
+    projects.string('status', 255)
+        .notNullable()
+
+    projects.string('title', 255)
+        .notNullable()
+
+        users.string('startDate', 255)
+        .notNullable()
+
+        users.string('endDate', 255)
+        .notNullable()
+
+        users.string('cta', 255)
+
+        users.text('desc', 255)
+
+        users.integer('goal')
+        .notNullable()
+
+        users.string('PrimaryPic')
+  })
 };
 
 exports.down = function(knex) {
-  return knex.schema.dropTableIfExists('users')
+    return knex.schema.dropTableIfExists('projects')
+    return knex.schema.dropTableIfExists('users')
 };

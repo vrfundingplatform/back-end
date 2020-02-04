@@ -2,8 +2,9 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 
-const authn = require('../api/authMiddleware');
-const userRouter = require('../api/userRouter');
+const authRouter = require('../auth/authRouter');
+const usersRouter = require('../resources/users/usersRouter');
+const projectsRouter = require('../resources/projects/projectsRouter');
 
 const server = express();
 
@@ -11,7 +12,9 @@ server.use(helmet());
 server.use(cors());
 server.use(express.json());
 
-server.use('/api/authn', userRouter);
+server.use('/auth', authRouter);
+server.use('/users', usersRouter);
+server.use('/projects', projectsRouter);
 
 server.get('/', (req, res) => {
         res.send({ message: "Server is live" });
