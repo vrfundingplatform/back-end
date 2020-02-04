@@ -11,6 +11,10 @@ server.use(helmet());
 server.use(cors());
 server.use(express.json());
 
-server.use('/api/userRouter', authn, userRouter);
+server.use('/api/authn', userRouter);
+
+server.get('/', (req, res) => {
+        res.send({ message: "Server is live" });
+  });
 
 module.exports = server

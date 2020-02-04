@@ -10,18 +10,12 @@ function generateToken(user) {
     const options = {
         expiresIn: '1d',
     };
-    return jwt.sign(payload, process.env.JWT_SECRET || 'lalalalkdjhaha', options);
+    return jwt.sign(payload, process.env.JWT_SECRET || 'AKDDHDHD', options);
   }
 
-router.get('/', (req, res) => {
-  const users = {
-    headers: { accept: 'application/json' },
-  };
-});
-
-router.post('/regsister', (req, res) => {
-    const { username, password } = req.body;
-    Users.insert({ username, password: bcrypt.hashSync(password, 8) })
+router.post('/register', (req, res) => {
+    const { username, email, firstname, lastname, country, state, avatar, bio, bankacct, age,password } = req.body;
+    Users.insert({ username, email, firstname, lastname, country, state, avatar, bio, bankacct, age, password: bcrypt.hashSync(password, 8) })
         .then(id => {
             res.status(201).json({ message: "User registered", id });
         })
@@ -32,7 +26,6 @@ router.post('/regsister', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-    // implement login
     const { username, password } = req.body;
       Users
           .findByUsername(username)
