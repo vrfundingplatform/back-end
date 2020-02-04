@@ -4,7 +4,6 @@ module.exports = {
     client: 'sqlite3',
     useNullAsDefault: true,
     connection: { filename: './data/vrfund.db3' },
-    useNullAsDefault: true,
     migrations: {
       directory: './data/migrations',
       tableName: 'dbmigrations',
@@ -21,7 +20,6 @@ module.exports = {
     client: 'sqlite3',
     useNullAsDefault: true,
     connection: { filename: './data/vrfund.db3' },
-    useNullAsDefault: true,
     migrations: {
       directory: './data/migrations',
       tableName: 'dbmigrations',
