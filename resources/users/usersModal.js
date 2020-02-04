@@ -12,9 +12,9 @@ function find() {
     return db('users');
 }
 
-function findById(where) {
+function findById(id) {
     return db('users')
-    .where({ id})
+    .where({ id })
     .first();
 }
 
@@ -26,11 +26,11 @@ function findByUsername(username) {
 function updateUser(id, changes) {
     return db('users')
     .where({ id })
-    .update((changes, '*'));
+    .update(changes, '*');
 }
 
-function deleteUser(users) {
+function deleteUser(id) {
     return db('users')
     .where({ id })
-    .del((id) => id);
+    .del();
 }

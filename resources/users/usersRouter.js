@@ -1,19 +1,18 @@
 const router = require('express').Router();
 const Users = require('./usersModal');
 
-router.get('/users', (req, res) => {
-    const { username, email, firstname, lastname, country, state, avatar, bio, bankacct, age, password } = req.body;
-    Users.insert({ username, email, firstname, lastname, country, state, avatar, bio, bankacct, age, password })
+router.get('/', (req, res) => {
+    Users.find()
         .then(id => {
-            res.status(201).json({ message: "User registered", id });
+            res.status(200).json({ message: "List of users", id });
         })
         .catch(err => {
             console.log(err);
-            res.status(500).json({ error: "Error registering user"});
+            res.status(500).json({ error: "Error retrieving users"});
         });
 });
 
-router.put('/users/:id', (req, res) => {
+router.put('/:id', (req, res) => {
     const { id } = req.params;
     const { username, email, firstname, lastname, country, state, avatar, bio, bankacct, age, password } = req.body
     
@@ -21,31 +20,29 @@ router.put('/users/:id', (req, res) => {
         return res.status(400).json({error: 'Need updates'});
     }
     Users
-          .updateUser(user)
-          .then(user => {
-              if (user && bcrypt.compareSync(password, user.password)) {   
-                  const token = generateToken(user);     
-              res.status(200).json({ 
-                  message: `Welcome back! ${ user.username }`,
-                  token
-              });
+          .updateUser(id, {username, email, firstname, lastname, country, state, avatar, bio, bankacct, age, password})
+          .then(updated => {
+              if (updated) {Users.findById(updated)
+              .then (updated => {
+                res.status(200).json({ updated })})
               } else {
-                  res.status(401).json({ error: "Invalid password", id });
+                  res.status(404).json({ error: "User with id does not exist" })
               }
           })
           .catch(err => {
               console.log(err);
-              res.status(500).json({ error: "Error registering user"});
+              res.status(500).json({ error: "Error updating user profile"});
           });
   });
 
-  router.delete('/users/:id', (req, res) => {
+  router.delete('/:id', (req, res) => {
     const { id } = req.params;
+    console.log(req.params);
       Users
           .deleteUser(id)
           .then(removed => {
               if (removed) {        
-              res.status(204).end();
+              res.status(204).end({ message: "Profile was successfully deleted" });
               } else {
                 res.status(404).json({ error: "User id does not exist" });
               }
