@@ -45,7 +45,7 @@ exports.up = function(knex) {
           .notNullable()
           .unique()
   
-      projects.binary('users_projectid', 255)
+      projects.integer('users_projectid', 255)
           .notNullable()
           .unique()
   
