@@ -17,7 +17,7 @@ server.use('/users', usersRouter);
 server.use('/projects', projectsRouter);
 
 server.get('/', (req, res) => {
-        res.send({ message: "Server is live" });
+        res.send({ message: "The server is alive!" });
   });
 
 module.exports = server

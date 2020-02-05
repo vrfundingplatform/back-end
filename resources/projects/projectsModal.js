@@ -1,14 +1,14 @@
 const db = require('../../data/dbConfig');
 
 module.exports = {
-    findProject,
+    findProjects,
     findProjectBy,
     findByProjectTitle,
     updateProject,
     deleteProject,
 }
 
-function findProject() {
+function findProjects() {
     return db('projects');
 }
 
