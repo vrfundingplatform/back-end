@@ -1,13 +1,13 @@
 
 exports.seed = function(knex) {
   // Deletes ALL existing entries
-  return knex('projects').del()
+  return knex('projects').truncate()
     .then(function () {
       // Inserts seed entries
-      return knex('projects').insert([
+      return knex('projects').insert(
         {
           id: 1, 
-          users_projectid: 'bslayer',
+          users_projectid: 1,
           category: 'Virtual Reality',
           subcategory: 'Wellness',
           status: 'Active',
@@ -19,6 +19,6 @@ exports.seed = function(knex) {
           goal: '100,000',
           primaryPic: '',
         },
-      ]);
+      );
     });
 };
