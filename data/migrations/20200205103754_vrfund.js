@@ -45,10 +45,12 @@ exports.up = function(knex) {
           .notNullable()
           .unique()
   
-        projects.integer('users_projectid', 255)
+        projects.integer('users_projectid')
           .notNullable()
-          .unique()
-  
+          .unsigned()
+          .references('id')
+          .inTable('users')
+          
         projects.string('category', 255)
           .notNullable()
   

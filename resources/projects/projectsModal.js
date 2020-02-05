@@ -4,6 +4,7 @@ module.exports = {
     findProjects,
     findProjectBy,
     findByProjectTitle,
+    insertProject,
     updateProject,
     deleteProject,
 }
@@ -16,18 +17,26 @@ function findProjectBy(where) {
     return db('projects').where(where);
 }
 
-function findByProjectTitle(username) {
-    return findBy({ username }).first();
+function findByProjectTitle(title) {
+    return findBy({ title }).first();
 }
 
-function updateProject(user) {
+function insertProject(project) {
+    console.log("projectModal",project)
     return db('projects')
-    .where(project, 'id')
-    .update((id) => id);
+    .insert(project, 'id')
+    .then((id) => id);
+    
 }
 
-function deleteProject(user) {
+function updateProject(id, changes) {
     return db('projects')
-    .where(project, 'id')
-    .del((id) => id);
+    .where({ id })
+    .update(changes);
+}
+
+function deleteProject(id, remove) {
+    return db('projects')
+    .where({ id })
+    .del(remove);
 }

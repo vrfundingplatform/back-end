@@ -12,11 +12,12 @@ router.get('/', (req, res) => {
         });
 });
 
-router.post('/projects', (req, res) => {
-    const { cateogory, subcategory, status, title, startDate, endDate, cta, desc, goal, primaryPic } = req.body;
-    Users.insert({ cateogory, subcategory, status, title, startDate, endDate, cta, desc, goal, primaryPic })
-        .then(id => {
-            res.status(201).json({ message: "Project submitted", id });
+router.post('/', (req, res) => {
+    const { users_projectid, category, subcategory, status, title, startDate, endDate, cta, desc, goal, primaryPic } = req.body;
+    Projects.insertProject({ users_projectid, category, subcategory, status, title, startDate, endDate, cta, desc, goal, primaryPic })
+        .then(pro => {
+            console.log(pro);
+            res.status(201).json({ message: "Project submitted"});
         })
         .catch(err => {
             console.log(err);
@@ -24,19 +25,18 @@ router.post('/projects', (req, res) => {
         });
 });
 
-router.put('/projects', (req, res) => {
+router.put('/:id', (req, res) => {
     const { id } = req.params;
-    const { cateogory, subcategory, status, title, startDate, endDate, cta, desc, goal, primaryPic } = req.body
+    const { category, subcategory, status, title, startDate, endDate, cta, desc, goal, primaryPic } = req.body
     
-    if (!cateogory && !subcategory && !status && !title && !startDate && !endDate && !cta && !desc && !goal && !primaryPic) {
+    if (!category && !subcategory && !status && !title && !startDate && !endDate && !cta && !desc && !goal && !primaryPic) {
         return res.status(400).json({error: 'Need updates'});
     }
     Projects
-          .updateProject(id, {cateogory, subcategory, status, title, startDate, endDate, cta, desc, goal, primaryPic})
+          .updateProject(id, {category, subcategory, status, title, startDate, endDate, cta, desc, goal, primaryPic})
           .then(updated => {
-              if (updated) {Projects.findById(updated)
-              .then (updated => {
-                res.status(200).json({ updated })})
+              if(updated) {
+                res.status(200).json({ updated })
               } else {
                   res.status(404).json({ error: "Project does not exist" })
               }
@@ -49,12 +49,13 @@ router.put('/projects', (req, res) => {
 
   router.delete('/:id', (req, res) => {
     const { id } = req.params;
-    console.log(req.params);
+    console.log("const id", req.params);
       Projects
           .deleteProject(id)
           .then(removed => {
-              if (removed) {        
-              res.status(204).end({ message: "Project was successfully deleted" });
+              if (removed) {       
+            console.log("remove project", removed); 
+              res.status(200).json({ message: "Project was successfully deleted" });
               } else {
                 res.status(404).json({ error: "Project does not exist" });
               }
