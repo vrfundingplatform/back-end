@@ -23,7 +23,6 @@ exports.up = function(knex) {
           .notNullable()
           
         users.string('country', 255)
-          .notNullable()
   
         users.string('state', 255)
   
@@ -32,11 +31,9 @@ exports.up = function(knex) {
         users.text('bio', 255)
   
         users.boolean('bankacct')
-          .notNullable()
           .defaultTo(false)
   
         users.boolean('age')
-          .notNullable()
           .defaultTo(false)
     })
   
@@ -63,10 +60,8 @@ exports.up = function(knex) {
           .notNullable()
           
         projects.string('startDate', 255)
-        .notNullable()
   
         projects.string('endDate', 255)
-        .notNullable()
   
         projects.string('cta', 255)
   

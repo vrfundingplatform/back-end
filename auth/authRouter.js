@@ -37,7 +37,7 @@ router.post('/login', (req, res) => {
                   token
               });
               } else {
-                  res.status(401).json({ error: "Invalid password", id });
+                  res.status(401).json({ error: "Invalid password" });
               }
           })
           .catch(err => {
