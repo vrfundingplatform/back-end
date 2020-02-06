@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Projects = require('./projectsModal');
+const Restrict = require('../../auth/restrict');
 
 router.get('/', (req, res) => {
     Projects.findProjects()
@@ -12,7 +13,7 @@ router.get('/', (req, res) => {
         });
 });
 
-router.post('/', (req, res) => {
+router.post('/', Restrict, (req, res) => {
     const { users_projectid, category, subcategory, status, title, startDate, endDate, cta, desc, goal, primaryPic } = req.body;
     Projects.insertProject({ users_projectid, category, subcategory, status, title, startDate, endDate, cta, desc, goal, primaryPic })
         .then(pro => {
@@ -25,7 +26,7 @@ router.post('/', (req, res) => {
         });
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', Restrict, (req, res) => {
     const { id } = req.params;
     const { category, subcategory, status, title, startDate, endDate, cta, desc, goal, primaryPic } = req.body
     
@@ -47,7 +48,7 @@ router.put('/:id', (req, res) => {
           });
   });
 
-  router.delete('/:id', (req, res) => {
+  router.delete('/:id', Restrict, (req, res) => {
     const { id } = req.params;
     console.log("const id", req.params);
       Projects
