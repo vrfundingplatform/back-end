@@ -41,11 +41,7 @@ router.put('/:id', (req, res) => {
       Users
           .deleteUser(id)
           .then(removed => {
-              if (removed) {        
-              res.status(204).end({ message: "Profile was successfully deleted" });
-              } else {
-                res.status(404).json({ error: "User id does not exist" });
-              }
+              res.status(201).json({ message: "Profile was successfully deleted", userid:`${id} was deleted` });
           })
           .catch(err => {
               console.log('delete', err);
