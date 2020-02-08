@@ -1,6 +1,7 @@
 const server = require('../../api/server');
 const request = require('supertest');
 const db = require('../../data/dbConfig');
+// set object as a variable const userProfile = 
 
 beforeEach(() => {
     return db.migrate.rollback()
